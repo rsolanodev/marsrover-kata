@@ -1,5 +1,5 @@
 import pytest
-from passporter.main import Direction, MarsRover, Movement
+from marsrover.main import Direction, MarsRover, Movement
 
 
 class TestMarsRover:
@@ -57,7 +57,7 @@ class TestMarsRover:
             (Direction.WEST, Direction.SOUTH),
         ],
     )
-    def test_rotate_rover_to_left(
+    def test_rotates_rover_to_left(
         self, direction: Direction, expected_direction: Direction
     ) -> None:
         mars_rover = MarsRover(x=0, y=0, direction=direction)
@@ -75,7 +75,7 @@ class TestMarsRover:
             (Direction.WEST, Direction.NORTH),
         ],
     )
-    def test_rotate_rover_to_right(
+    def test_rotates_rover_to_right(
         self, direction: Direction, expected_direction: Direction
     ) -> None:
         mars_rover = MarsRover(x=0, y=0, direction=direction)
