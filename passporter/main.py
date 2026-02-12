@@ -3,13 +3,15 @@ from enum import StrEnum
 
 
 class Direction(StrEnum):
-    N = "N"
-    S = "S"
-    E = "E"
-    W = "W"
+    NORTH = "north"
+    SOUTH = "south"
+    EAST = "east"
+    WEST = "west"
 
 
-class RotateOptions(StrEnum):
+class Movement(StrEnum):
+    FORWARD = "forward"
+    BACKWARD = "backward"
     LEFT = "left"
     RIGHT = "right"
 
@@ -21,70 +23,87 @@ class MarsRover:
     direction: Direction
 
     def forward(self) -> None:
-        if self.direction == Direction.N:
+        if self.direction == Direction.NORTH:
             self.y = self.y + 1
             return
 
-        if self.direction == Direction.S:
+        if self.direction == Direction.SOUTH:
             self.y = self.y - 1
             return
 
-        if self.direction == Direction.E:
+        if self.direction == Direction.EAST:
             self.x = self.x + 1
             return
 
-        if self.direction == Direction.W:
+        if self.direction == Direction.WEST:
             self.x = self.x - 1
             return
 
     def backward(self) -> None:
-        if self.direction == Direction.N:
+        if self.direction == Direction.NORTH:
             self.y = self.y - 1
             return
 
-        if self.direction == Direction.S:
+        if self.direction == Direction.SOUTH:
             self.y = self.y + 1
             return
 
-        if self.direction == Direction.E:
+        if self.direction == Direction.EAST:
             self.x = self.x - 1
             return
 
-        if self.direction == Direction.W:
+        if self.direction == Direction.WEST:
             self.x = self.x + 1
             return
 
-    def rotate(self, to: RotateOptions) -> None:
-        if to == RotateOptions.LEFT:
-            if self.direction == Direction.N:
-                self.direction = Direction.W
-                return
+    def left(self) -> None:
+        if self.direction == Direction.NORTH:
+            self.direction = Direction.WEST
+            return
 
-            if self.direction == Direction.E:
-                self.direction = Direction.N
-                return
+        if self.direction == Direction.EAST:
+            self.direction = Direction.NORTH
+            return
 
-            if self.direction == Direction.S:
-                self.direction = Direction.E
-                return
+        if self.direction == Direction.SOUTH:
+            self.direction = Direction.EAST
+            return
 
-            if self.direction == Direction.W:
-                self.direction = Direction.S
-                return
+        if self.direction == Direction.WEST:
+            self.direction = Direction.SOUTH
+            return
 
-        if to == RotateOptions.RIGHT:
-            if self.direction == Direction.N:
-                self.direction = Direction.E
-                return
+    def right(self) -> None:
+        if self.direction == Direction.NORTH:
+            self.direction = Direction.EAST
+            return
 
-            if self.direction == Direction.E:
-                self.direction = Direction.S
-                return
+        if self.direction == Direction.EAST:
+            self.direction = Direction.SOUTH
+            return
 
-            if self.direction == Direction.S:
-                self.direction = Direction.W
-                return
+        if self.direction == Direction.SOUTH:
+            self.direction = Direction.WEST
+            return
 
-            if self.direction == Direction.W:
-                self.direction = Direction.N
-                return
+        if self.direction == Direction.WEST:
+            self.direction = Direction.NORTH
+            return
+
+    def move(self, movements: list[Movement]) -> None:
+        for movement in movements:
+            if movement == Movement.FORWARD:
+                self.forward()
+                continue
+
+            if movement == Movement.BACKWARD:
+                self.backward()
+                continue
+
+            if movement == Movement.LEFT:
+                self.left()
+                continue
+
+            if movement == Movement.RIGHT:
+                self.right()
+                continue
